@@ -1,0 +1,48 @@
+/* src/components/Visit.css */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Custom sizes for each image */
+.gallery-item-0 {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.gallery-item-1 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.gallery-item-2 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.gallery-item-3 {
+    grid-column: span 3; 
+    grid-row: span 1; 
+    height: 440px; 
+}
+
+.gallery-item-4 {
+    grid-column: span 2;
+    grid-row: span 1; 
+    height: 400px;
+   
+}
