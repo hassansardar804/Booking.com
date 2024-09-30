@@ -1,40 +1,49 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcryptjs')
+const mongoose = require('mongoose');
 
-//schema start
-const UserSchema = new mongoose.Schema({
-    name: {
+const userSchema = new mongoose.Schema({
+    email: {
         type: String,
-        required: true
-    },
-    email:
-    {
-        type: String,
+        required: true,
         unique: true,
-        required: true
     },
-    password:
-    {
+    password: {
         type: String,
-        required: true
+        required: true,
     },
-    Cnic: {
+    role: {
         type: String,
-        unique: true,
-        required: true
+        enum: ['admin', 'user'],
+        default: 'user',
     },
+
+    firstName: String,
+    lastName: String,
+    phoneNumber: String,
+    address: String,
     gender: {
         type: String,
-        enum: ['Male', 'Female', 'Others'],
-        default: 'Male',
-        required: true
-    }
+        enum: ['male', 'female', 'other'],
+    },
+    profileImage: {
+        type: String,
+    },
+    cnic: {
+        type: String,
+        unique: true,
+        validate: {
+            validator: function (v) {
+
+                return /^\d{13}$/.test(v);
+            },
+            message: 'Invalid CNIC format',
+        },
+    },
+    isVerified: {
+        type: Boolean,
+        default: false,
+    },
 });
 
-UserSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
-});
+const User = mongoose.model('User', userSchema);
 
-module.exports = mongoose.model('User', UserSchema)
+module.exports = User;

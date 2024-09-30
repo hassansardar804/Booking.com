@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
-const User = require('./Routes/User/User.router')
+const User = require('./Routes/User/User.routes')
 const Bus = require('./Routes/Bus/Bus.routes')
 const RegisterBus = require('./Routes/Bus/Registerbus.routes.js/Registerbus.routes')
 const Ticket = require('./Routes/Ticket/Ticket.routes')
@@ -17,6 +17,8 @@ app.use(cors());
 
 //user
 app.use('/user', User)
+
+
 //Register Bus
 app.use('/RegisterBus', RegisterBus)
 //bus
